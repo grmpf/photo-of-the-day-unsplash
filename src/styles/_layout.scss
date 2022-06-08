@@ -1,0 +1,20 @@
+@use 'mixins/layout';
+
+html, body, #__next {height: 100%; width: 100%; margin:0;padding:0}
+
+/* disables Android overscroll glow and iOS rubberbanding
+- https://developers.google.com/web/updates/2017/11/overscroll-behavior#disableglow
+*/
+html, body {
+	overscroll-behavior-y: none;
+}
+
+// configurable layout with defaults
+@include layout.configure(
+	//$headerHeight: 60px,
+	//$footerHeight: 40px,
+	//$headerHeight-Xs-2Xl: 10vh,
+	//$footerHeight-Xs-2Xl: 8vh,
+	//$contentTopBottomHeight: 9vh
+);
+@include layout.styles; // changes doesn't trigger hot reload atm (inside of @layer base)

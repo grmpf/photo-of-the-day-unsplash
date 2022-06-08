@@ -1,0 +1,74 @@
+## CRON JOB - daily @ 6am
+# The 1am cronjob did actually run between 4:20 and 5:02 CEST [-2h in UTC] (best guess: gets scheduled at 4:00 and runs ASAP)
+name: cron-6am-daily
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    #defaults:
+    #  run:
+    #    shell: bash
+    steps:
+
+      #  v1 - revalidates / /1 /2 - always successful no matter the status code etc.
+      #- name: Step 1/2 - Revalidate StaticProps - [[...id]].tsx
+      #  run: |
+      #    curl --request POST \
+      #    --url 'https://photo-of-the-day-unsplash.vercel.app/api/revalidate/potd' \
+      #    --header 'Authorization: Bearer ${{ secrets.GH_REPO_SECRET_KEY }}'
+
+      #  v2 - revalidates / /1 /2 - checks for status-code != 200
+      # This puts the output in stderr and the status-code in STATUS, then adds stderr back to stdout and checks for STATUS != 200
+      - name: Step 1/2 - Revalidate StaticProps - [[...id]].tsx
+        run: |
+          { STATUS=$(curl --request POST -isSL -o /dev/stderr -w "%{http_code}" --url 'https://photo-of-the-day-unsplash.vercel.app/api/revalidate/potd' --header 'Authorization: Bearer ${{ secrets.GH_REPO_SECRET_KEY }}'); } 2>&1;
+          echo ""
+          echo "Exit code: $?"
+          # exit 1 aborts job with an error; exit 0 means "all good, move on"
+          if [[ STATUS -ne 200 ]]; then exit 1; else exit 0; fi
+
+      # v1
+      #- name: Step 2/2 - Sitemap-Ping - google.com
+      #  run: |
+      #    curl -isSL -o /dev/null -w "%{http_code}\n" \
+      #    --url 'https://www.google.com/ping?sitemap=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app%2Fsitemap.xml'
+      #    echo "Exit code: $?"
+      #    if [[ "$?" -gt 0 ]]; then exit 1; else exit 0; fi
+      ## shell: bash
+
+      # v2
+      - name: Step 2/2 - Sitemap-Ping - google.com
+        run: |
+          STATUS=$(curl -isSL -o /dev/null -w "%{http_code}" --url 'https://www.google.com/ping?sitemap=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app%2Fsitemap.xml')
+          echo ""
+          echo "Status code: $STATUS"
+          echo "Exit code: $?"
+          # exit 1 aborts job with an error; exit 0 means "all good, move on"
+          if [[ STATUS -ne 200 || "$?" -gt 0 ]]; then exit 1; else exit 0; fi
+
+
+
+
+
+      # v1 - stopped working
+      #- name: Step 3/3 - Sitemap-Ping - bing.com
+      #  run: |
+      #    curl -isSL -o /dev/null -w "%{http_code}\n" \
+      #    --url 'https://www.bing.com/webmaster/ping.aspx?siteMap=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app%2Fsitemap.xml'
+      #    echo "Exit code: $?"
+      #    if [[ "$?" -gt 0 ]]; then exit 1; else exit 0; fi
+      # shell: bash
+
+      # v2 - stopped working
+      #- name: Step 2/2 - Sitemap-Ping - google.com
+      #  run: |
+      #    STATUS=$(curl -isSL -o /dev/null -w "%{http_code}" --url 'https://www.bing.com/webmaster/ping.aspx?siteMap=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app%2Fsitemap.xml')
+      #    echo ""
+      #    echo "Status code: $STATUS"
+      #    echo "Exit code: $?"
+      #    # exit 1 aborts job with an error; exit 0 means "all good, move on"
+      #    if [[ STATUS -ne 200 || "$?" -gt 0 ]]; then exit 1; else exit 0; fi
+

@@ -1,0 +1,13 @@
+// Some details: /docs/tailwindCss.md
+
+@import "tailwindcss/base";
+	@import 'layout';
+	@import 'typography';
+
+@import "tailwindcss/components";
+	@import 'headerFooter';
+	@import 'contentTopBottom';
+	@import 'potd';
+
+@import "tailwindcss/utilities";
+	@import 'utils';

@@ -1,0 +1,124 @@
+.contentTop {
+	@apply flex justify-between w-full relative;
+	@apply flex-shrink-0; // TEST WITHOUT ME
+	//@apply flex-shrink; // TEST
+	@apply 3xs-y-max:hidden;
+
+	z-index: 2;
+	height: 15vh;
+	height: var(--h-content-t);
+
+
+	.lightContainer {
+		@apply flex flex-col flex-nowrap justify-end relative;
+
+		height: 100%;
+		width: 30%;
+		max-width: 8%;
+		min-width: 8px;
+		margin: 0 auto;
+		z-index: 1;
+
+		.light {
+			background-color: theme('colors.slate.600');
+			border-radius: 999px 999px 5px 5px;
+
+			//box-shadow: inset 0px 2px 5px rgb(255 255 255 / 60%);
+			box-shadow: inset 0px 1px 5px rgb(0 0 0 / 60%), inset 0px 3px 5px rgb(255 255 255);
+			//box-shadow: inset 0px 1px 4px rgb(0 0 0 / 60%), inset 0px 2px 3px rgb(255 255 255);
+		}
+	}
+
+	.rayTest,
+	.rayTest2 {
+		perspective: 400px; // get stretched weirdly much on large height screens
+		perspective: calc(var(--h-content) / 2);
+	}
+
+	.rayTest2:after {
+		content: '';
+	}
+
+	.rayTest .lightRay,
+	.rayTest2:after {
+		pointer-events: none;
+
+		//opacity: 1;
+		//transition: opacity 1000ms ease;
+
+		position: absolute;
+		top: 100%;
+		//top: calc(100% - 5px);
+		left: 50%;
+		right: 0;
+		transform: translateX(-50%) rotateX(61deg);
+		transform-origin: center 0;
+
+		width: 20%;
+		min-width: 20px;
+		//height: calc(min(33vw, var(--h-content-inner) / 3)); // ???
+		height: calc(var(--h-content-inner) / 3);
+
+		background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3) 40%, transparent);
+		z-index: -1;
+
+		border-radius: 5% 5% 0 0;
+
+		filter: blur(2vh);
+		//border: 8px solid red;
+	}
+
+}
+
+
+.contentBottom {
+	height: var(--h-content-b);
+	@apply flex-shrink-0; // TEST WITHOUT ME
+	//@apply max-w-[80%]; //v1
+
+	@apply flex justify-center items-start; //v2
+	.caption {
+		@apply max-w-[80%]; //v2
+
+		z-index: 3;
+		@apply mt-[1vh] text-[1.8vh] text-center; // text-baseOFF
+		@apply relative border rounded-sm shadow-sm bg-white;
+		@apply py-1 px-3 2xl:py-[0.6vh] 2xl:px-[1.2vh];
+
+		.extraScrews:before,
+		.extraScrews:after,
+		&:before,
+		&:after {
+			//@apply top-1 left-0.5 text-gray-500;
+			@apply top-[0.6vh] left-[0.3vh] text-gray-500;
+			font-size: 80%;
+			line-height: 0;
+			content: '•';
+			position: absolute;
+		}
+
+		&:after,
+		.extraScrews:after {
+			//@apply left-auto right-0.5;
+			@apply left-auto right-[0.3vh];
+		}
+
+		.extraScrews:before,
+		.extraScrews:after {
+			//@apply top-auto bottom-1;
+			@apply top-auto bottom-[0.9vh];
+		}
+
+		transition: transform 0.5s ease;
+		transform-origin: center 100%;
+
+		&:hover {
+			transform: scale(1.4);
+		}
+
+		&:focus-within {
+			transform: scale(1.4);
+		}
+
+	}
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg fill="#5299d1" width="22" height="22" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve">
+<rect class="favBg" fill="url(#gradient)" x="0" y="0" width="100%" height="100%"/>
+<circle fill="#fff" cx="11" cy="11" r="8"/>
+<path class="favSun" fill="#bbb" d="m14.5 11c0.828 0 1.5-0.672 1.5-1.5s-0.672-1.5-1.5-1.5-1.5 0.672-1.5 1.5 0.672 1.5 1.5 1.5z"/>
+<path class="favBg" fill="url(#gradient)" d="m3 20.289v-2.7192l5.2701-6.3571c0.16229-0.18743 0.42204-0.32589 0.70089-0.32589 0.28 0 0.52734 0.1205 0.6942 0.3125l2.2433 2.4263c0.06171 0.06171 0.13629 0.13193 0.17857 0.16964 0.11657 0.104 0.28039 0.17188 0.45982 0.17188 0.18743 0 0.31539-0.07986 0.47768-0.19643l0.77902-0.65848c0.17029-0.13714 0.32091-0.23884 0.53348-0.23884 0.21714 0 0.40891 0.11488 0.53348 0.26116l4.1295 4.4442-0.01339 2.7212z"/>
+<defs>
+<style type="text/css"><![CDATA[
+@media (prefers-contrast: more) {
+.favBg, .favSun {
+fill: #5299d1;
+}
+}
+]]></style>
+<radialGradient id="gradient" cx="13" cy="9.75" r="60.13" gradientUnits="userSpaceOnUse">
+<stop stop-color="#5299d1" offset="0.00343514"/>
+<stop stop-color="#1d508f" offset="0.3"/>
+<stop stop-color="#04142e" offset="1"/>
+</radialGradient>
+</defs>
+</svg>

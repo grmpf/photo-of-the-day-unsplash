@@ -1,0 +1,76 @@
+@use './mixins/svg';
+
+.flexGridSingle {
+	@apply flex flex-row flex-nowrap;
+	@apply content-center items-center;
+	@apply justify-center; //justify-between
+
+	height: var(--h-content);
+
+	@apply bg-stone-50;
+
+	$svgBg: "<svg width='650' height='500' viewBox='0 0 650 500' xmlns='http://www.w3.org/2000/svg'><filter id='roughpaper' x='0%' y='0%' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.04' result='noise' numOctaves='5' /><feDiffuseLighting in='noise' lighting-color='white' surfaceScale='3.6'><feDistantLight azimuth='45' elevation='70' /></feDiffuseLighting></filter><rect x='0' y='0' width='100%' height='100%' filter='url(#roughpaper)' fill='none'></rect></svg>";
+	background-image: svg.svg-url($svgBg);
+	background-size: cover;
+
+	//@apply bg-test;
+}
+
+.flexGridSingleItem {
+	@apply relative;
+	@apply p-1.5 sm:p-2 2xl:p-[min(2vh,2vw)];
+	@apply rounded sm:rounded-md xl:rounded-[min(1vh,1vw)];
+	@apply bg-gray-700;
+	//@apply border; // maybe for darkmode
+
+	@apply shadow-slate-900/30 #{!important}; // this somehow gets lost on different screen sizes without !important
+	@apply shadow-lg;
+	@screen 2xl {
+		//shadow-md
+		//--tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+		//--tw-shadow-colored: 0 0.66vh 1vh -0.16vh var(--tw-shadow-color), 0 0.33vh 0.66vh -0.33vh var(--tw-shadow-color);
+
+		//shadow-lg
+		//--tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+		--tw-shadow-colored: 0 1.66vh 2.5vh -0.5vh var(--tw-shadow-color), 0 0.66vh 1vh -0.66vh var(--tw-shadow-color);
+
+		//shadow-xl
+		//--tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+		//--tw-shadow-colored: 0 3.33vh 4.17vh -0.8vh var(--tw-shadow-color), 0 1.33vh 1.67vh -1vh var(--tw-shadow-color);
+
+		//shadow-2xl
+		//--tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+		//--tw-shadow-colored: 0 4.16vh 8.3vh -2vh var(--tw-shadow-color);
+	}
+
+	> span,
+	> div {
+		@apply ring-1 sm:ring-2 ring-stone-50/60 2xl:ring-[0.4vh];
+
+	}
+	.imageDate {
+		// light on dark version
+		//@apply absolute right-auto top-auto w-auto h-auto left-0 bottom-0;
+		//@apply py-0.5 px-1.5 pb-px;
+		//@apply backdrop-blur-xs bg-gray-500/50 rounded-tr-[1px] ;
+		//@apply text-[1.8vh] text-stone-200 font-semibold tracking-wider;
+
+		// dark on light version
+		@apply absolute left-auto top-auto w-auto h-auto right-0 bottom-0;
+		@apply py-0.5 px-1.5 pb-px;
+		@apply backdrop-blur-xs bg-stone-50/[50%] rounded-tl-[1px];
+		@apply text-[1.8vh] text-black font-semibold tracking-wider;
+
+		opacity: 1;
+		transition: opacity 0.2s;
+	}
+	&:hover .imageDate {
+		opacity: 0;
+	}
+
+	.blurImgBox {
+		@apply block absolute;
+		@apply inset-1.5 sm:inset-2 2xl:inset-[min(2vh,2vw)]; // same as padding on parent
+	}
+}
+

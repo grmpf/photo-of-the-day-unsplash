@@ -1,0 +1,23 @@
+// TODO (when required):
+// - add tailwinds typography plugin (@tailwindcss/typography; to reset/normalize styles)
+// - set default h1, h2... styles etc.
+
+
+a, a:link, a:visited {
+	//color: theme('colors.sky.600');
+	color: theme('colors.sky.700');
+}
+a:hover, a:active, a:focus {
+	//color: theme('colors.sky.800');
+	color: #1a1a1a;
+}
+
+
+// adds default styles for disabled links
+a[aria-disabled] {
+	@apply text-slate-500;
+	cursor: not-allowed;
+	&:hover {
+		@apply text-slate-500;
+	}
+}

@@ -1,0 +1,32 @@
+/* child() - Usage as a mixin
+.parent {
+  .clearfix {
+    @include clearfix.child;
+  }
+}
+*/
+
+/* group() - Usage as a mixin
+.parent {
+  @include clearFixer.group;
+}
+*/
+
+
+// Basically just the good old .child used on a dummy <div> as last child element.
+// not really a mixin though
+@mixin child() {
+	& {
+		clear: both;
+		height: 0;
+		line-height: 0;
+	}
+}
+
+@mixin group() {
+	&::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}

@@ -1,0 +1,73 @@
+.topDiv {
+	position: relative;
+	height: var(--h-header);
+
+	> .topInner {
+		//@apply bg-slate-200 border-b border-slate-400/50;
+		@apply bg-slate-400/20 border-b border-slate-400/40;
+		//@apply bg-slate-50 border-b border-slate-400/50;
+	}
+
+	// causing some problems with overflow
+	// TODO: investigate
+	&:before {
+		content: '';
+		position: absolute;
+		width: 102vw;
+		top: 0;
+		bottom: 0;
+		left: -1vw;
+		right: -1vw;
+		z-index: -1;
+		@apply shadow-slate-900/30;
+		box-shadow: 0px 0px 1vh var(--tw-shadow-color);
+	}
+
+	h1 {
+		font-size: 16px;
+		font-size: 3vh;
+		font-size: calc(var(--h-header) / 4.5);
+	}
+
+	.subtitle {
+		font-size: 14px;
+		font-size: 2vh;
+		font-size: calc(var(--h-header) / 6);
+	}
+}
+
+.bottomDiv {
+	position: relative;
+	height: var(--h-footer);
+	z-index: 1;
+
+	> .bottomInner {
+		//@apply bg-slate-200 border-t border-slate-400/50;
+		@apply bg-slate-400/20 border-t border-slate-400/40;
+		//@apply bg-stone-50 border-t border-slate-400/50;
+	}
+
+	// causing some problems with overflow
+	// TODO: investigate
+	&:before {
+		content: '';
+		position: absolute;
+		width: 102vw;
+		top: 0;
+		bottom: 0;
+		left: -1vw;
+		right: -1vw;
+		z-index: -1;
+		@apply shadow-slate-900/30;
+		box-shadow: 0px 0.3vh 1vh var(--tw-shadow-color);
+	}
+
+	.footer {
+		width: 92vw;
+		margin: 0 auto;
+
+		font-size: 16px;
+		font-size: 2.5vh;
+		font-size: calc(var(--h-footer) / 3.8);
+	}
+}

@@ -1,0 +1,41 @@
+// PREP
+
+//:root {
+//	--fallback-title-bar-height: 40px;
+//}
+$-fallback-title-bar-height: 40px;
+
+.draggable {
+	/* Pre-fix app-region during standardization process */
+	-webkit-app-region: drag;
+	app-region: drag;
+}
+
+.nonDraggable {
+	/* Pre-fix app-region during standardization process */
+	-webkit-app-region: no-drag;
+	app-region: no-drag;
+}
+
+#titleBarContainer {
+	position: absolute;
+	top: env(titlebar-area-y, 0);
+	//height: env(titlebar-area-height, var(--fallback-title-bar-height));
+	height: env(titlebar-area-height, #{$-fallback-title-bar-height});
+	width: 100%;
+	background-color:#254B85;
+}
+
+#titleBar {
+	position: absolute;
+	top: 0;
+	display: flex;
+	user-select: none;
+	height: 100%;
+	left: env(titlebar-area-x, 0);
+	width: env(titlebar-area-width, 100%);
+
+	color: #FFFFFF;
+	font-weight: bold;
+	text-align: center;
+}

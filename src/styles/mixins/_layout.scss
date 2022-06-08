@@ -1,0 +1,70 @@
+// The whole layout is based on the viewport (vw/vh)
+
+$-headerHeightSmall: 10vh;
+$-footerHeightSmall: 8vh;
+$-headerHeight: 60px;
+$-footerHeight: 40px;
+$-headerHeightHuge: $-headerHeightSmall;
+$-footerHeightHuge: $-footerHeightSmall;
+
+$-contentTopHeight: 9vh; // keep top/bottom the same height if the actual content should be centered
+$-contentBottomHeight: $-contentTopHeight;
+
+//$-dark: #000000;
+
+@mixin configure($headerHeight: null, $footerHeight: null, $headerHeight-Xs-2Xl: null, $footerHeight-Xs-2Xl: null, $contentTopBottomHeight: null) {
+	@if $headerHeight {
+		$-headerHeight: $headerHeight !global;
+	}
+	@if $footerHeight {
+		$-footerHeight: $footerHeight !global;
+	}
+	@if $headerHeight-Xs-2Xl {
+		$-headerHeightSmall: $headerHeight-Xs-2Xl !global;
+		$-headerHeightHuge: $headerHeight-Xs-2Xl !global;
+	}
+	@if $footerHeight-Xs-2Xl {
+		$-footerHeightSmall: $footerHeight-Xs-2Xl !global;
+		$-footerHeightHuge: $footerHeight-Xs-2Xl !global;
+	}
+	@if $contentTopBottomHeight {
+		$-contentTopHeight: $contentTopBottomHeight !global;
+		$-contentBottomHeight: $contentTopBottomHeight !global;
+	}
+}
+
+@mixin styles {
+
+	:root {
+		--h-header: #{$-headerHeight};
+		--h-footer: #{$-footerHeight};
+		--h-content: calc(100vh - var(--h-header) - var(--h-footer));
+		--h-content-t: #{$-contentTopHeight};
+		--h-content-b: #{$-contentBottomHeight};
+		--h-content-inner: calc(var(--h-content) - var(--h-content-t) - var(--h-content-b));
+
+		// 88vw = 100vw - arrow left/right[5vw] - 2vw extra for padding
+		--xy-min: min(88vw, var(--h-content));
+		--xy-min2: min(88vw, var(--h-content-inner));
+	}
+
+	// this one is odd - should be @media screen(sm) {} but SCSS (i guess) doesn't like that
+	// https://tailwindcss.com/docs/functions-and-directives#screen
+	@screen 2xl { // (min-width: 1536px)
+		:root {
+			--h-header: #{$-headerHeightHuge};
+			--h-footer: #{$-footerHeightHuge};
+		}
+	}
+	@screen xs { // (max-width: 639px)
+		:root {
+			--h-header: #{$-headerHeightSmall};
+			--h-footer: #{$-footerHeightSmall};
+
+			// 78vw = 100vw - 10vw (arrow left/right) - 2vw (extra for padding)
+			--xy-min: min(78vw, var(--h-content));
+			--xy-min2: min(78vw, var(--h-content-inner));
+		}
+	}
+
+}

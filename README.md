@@ -38,7 +38,7 @@
 <tr>
   <td>
 
-[![Metrics](https://metrics.lecoq.io/grmpf?template=classic&base.header=0&base.activity=0&base.community=0&base.repositories=0&base.metadata=1&pagespeed=1&pagespeed.url=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app&pagespeed.detailed=false&pagespeed.screenshot=true&config.timezone=Europe%2FZurich&config.animations=false)](#)
+[![Metrics][metricsImg]][metricsImg]
 
   </td>
   <td>
@@ -132,3 +132,8 @@ yarn dev
 - [JsonLD](https://schema.org/)
 
 
+
+
+
+
+[metricsImg]: https://metrics.lecoq.io/grmpf?template=classic&base.header=0&base.activity=0&base.community=0&base.repositories=0&base.metadata=1&pagespeed=1&pagespeed.url=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app&pagespeed.detailed=false&pagespeed.screenshot=true&config.timezone=Europe%2FZurich&config.animations=false

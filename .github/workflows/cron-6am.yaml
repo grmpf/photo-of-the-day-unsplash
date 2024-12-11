@@ -1,9 +1,10 @@
-## CRON JOB - daily @ 6am
-# The 1am cronjob did actually run between 4:20 and 5:02 CEST [-2h in UTC] (best guess: gets scheduled at 4:00 and runs ASAP)
+## CRON JOB - daily @ 6am [UTC = GMT+0]
+# NOTE: The cron job is scheduled for 7am (GMT+1) but gets queued and usually runs around 7:22am [GMT+1] (1:22am [GMT-5] in Montréal Canada, where Unsplash is located)
 name: cron-6am-daily
 on:
   workflow_dispatch:
   schedule:
+    # daily @ 6am UTC
     - cron: '0 6 * * *'
 jobs:
   job1:
@@ -22,7 +23,7 @@ jobs:
 
       #  v2 - revalidates / /1 /2 - checks for status-code != 200
       # This puts the output in stderr and the status-code in STATUS, then adds stderr back to stdout and checks for STATUS != 200
-      - name: Step 1/2 - Revalidate StaticProps - [[...id]].tsx
+      - name: Step 1/1 - Revalidate StaticProps - [[...id]].tsx
         run: |
           { STATUS=$(curl --request POST -isSL -o /dev/stderr -w "%{http_code}" --url 'https://photo-of-the-day-unsplash.vercel.app/api/revalidate/potd' --header 'Authorization: Bearer ${{ secrets.GH_REPO_SECRET_KEY }}'); } 2>&1;
           echo ""
@@ -30,7 +31,7 @@ jobs:
           # exit 1 aborts job with an error; exit 0 means "all good, move on"
           if [[ STATUS -ne 200 ]]; then exit 1; else exit 0; fi
 
-      # v1
+      # v1 google
       #- name: Step 2/2 - Sitemap-Ping - google.com
       #  run: |
       #    curl -isSL -o /dev/null -w "%{http_code}\n" \
@@ -39,7 +40,7 @@ jobs:
       #    if [[ "$?" -gt 0 ]]; then exit 1; else exit 0; fi
       ## shell: bash
 
-      # v2 - DEPRECATED
+      # v2 google - DEPRECATED
       #- name: Step 2/2 - Sitemap-Ping - google.com
       #  run: |
       #    STATUS=$(curl -isSL -o /dev/null -w "%{http_code}" --url 'https://www.google.com/ping?sitemap=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app%2Fsitemap.xml')
@@ -53,7 +54,7 @@ jobs:
 
 
 
-      # v1 - stopped working
+      # v1 bing - stopped working
       #- name: Step 3/3 - Sitemap-Ping - bing.com
       #  run: |
       #    curl -isSL -o /dev/null -w "%{http_code}\n" \
@@ -62,8 +63,8 @@ jobs:
       #    if [[ "$?" -gt 0 ]]; then exit 1; else exit 0; fi
       # shell: bash
 
-      # v2 - stopped working
-      #- name: Step 2/2 - Sitemap-Ping - google.com
+      # v2 bing - stopped working
+      #- name: Step 2/2 - Sitemap-Ping - bing.com
       #  run: |
       #    STATUS=$(curl -isSL -o /dev/null -w "%{http_code}" --url 'https://www.bing.com/webmaster/ping.aspx?siteMap=https%3A%2F%2Fphoto-of-the-day-unsplash.vercel.app%2Fsitemap.xml')
       #    echo ""
